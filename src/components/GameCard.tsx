@@ -1,4 +1,4 @@
-import { Card, CardHeader, Heading, CardBody, Image, Text, CardFooter, Button } from "@chakra-ui/react";
+import { Card, Heading, CardBody, Image } from "@chakra-ui/react";
 import { Game } from "../hooks/useGames";
 // make different variable names from ones being imported
 
@@ -10,15 +10,10 @@ const GameCard = ({ game }: Props) => {
     return (
         <>
             <Card borderRadius={10} overflow='hidden' key={game.id}>
-                <CardHeader>
-                    <Heading size='md'>{game.name}</Heading>
-                </CardHeader>
+                <Image src={game.background_image} />
                 <CardBody>
-                    <Image src={game.background_image} />
+                    <Heading fontSize='2xl'>{game.name}</Heading>
                 </CardBody>
-                <CardFooter>
-                    <Button>View here</Button>
-                </CardFooter>
             </Card>
         </>
     )
