@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import apiClient from "../services/api-client";
 
+// first react mounts and unmounts due to strict mode
+
 export interface FetchGamesResponse {
     count: number;
     results: Game[];
@@ -9,6 +11,8 @@ export interface FetchGamesResponse {
 export interface Game {
     id: number;
     name: string;
+    image: string;
+    description: string;
 }
 
 const useGames = () => {
@@ -20,7 +24,8 @@ const useGames = () => {
 
     useEffect(() => {
         setLoading(true);
-        apiClient.get<FetchGamesResponse>('/games')
+        const controller = new AbortController();
+        apiClient.get<FetchGamesResponse>('/games', { signal: controller.signal })
             .then(({ data: allGames }) => {
                 setGames(allGames.results)
                 setLoading(false);
