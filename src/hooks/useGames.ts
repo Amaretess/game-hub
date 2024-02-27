@@ -11,7 +11,7 @@ export interface FetchGamesResponse {
 export interface Game {
     id: number;
     name: string;
-    image: string;
+    background_image: string;
     description: string;
 }
 
