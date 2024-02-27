@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react"
 import apiClient from "../services/api-client";
-import { Text } from "@chakra-ui/react";
+import { Spinner, Text } from "@chakra-ui/react";
 
 interface Game {
     id: number;
-    title: string;
+    name: string;
 }
 
 interface FetchGamesResponse {
@@ -16,25 +16,29 @@ const GameGrid = () => {
 
     const [games, setGames] = useState<Game[]>([]);
     const [error, setError] = useState('');
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setLoading] = useState(false);
 
 
     useEffect(() => {
+        setLoading(true);
         apiClient.get<FetchGamesResponse>('/games')
             .then(({ data: allGames }) => {
                 setGames(allGames.results)
+                setLoading(false);
             })
             .catch((err) => {
                 setError(err.message)
+                setLoading(false)
             })
     }, [])
 
     return (
         <>
+            {isLoading && <Spinner size="md" />}
             {error && <Text color="red" >{error}</Text>}
             <ul>
                 {games.map((game) => <li key={game.id}>
-                    {game.title}
+                    {game.name}
                 </li>)}
             </ul>
         </>
