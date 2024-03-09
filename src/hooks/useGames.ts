@@ -8,11 +8,17 @@ export interface FetchGamesResponse {
     results: Game[];
 }
 
+interface Platform {
+    id: number;
+    
+}
+
 export interface Game {
     id: number;
     name: string;
     background_image: string;
     description: string;
+    parent_platforms: 
 }
 
 const useGames = () => {
