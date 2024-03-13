@@ -41,4 +41,4 @@ const PlatformIconList = ({ platforms }: Props) => {
     )
 }
 
-export default PlatformIconList
+export default PlatformIconList;
