@@ -8,9 +8,14 @@ export interface FetchGamesResponse {
     results: Game[];
 }
 
-interface Platform {
+export interface Platform {
     id: number;
-    
+    name: string;
+    background_image: string;
+    // array of objects where each object has a property called platform 
+    parent_platforms: { platform: Platform }[]
+    slug: string;
+
 }
 
 export interface Game {
@@ -18,7 +23,7 @@ export interface Game {
     name: string;
     background_image: string;
     description: string;
-    parent_platforms: 
+    parent_platforms: { platform: Platform }[]
 }
 
 const useGames = () => {
